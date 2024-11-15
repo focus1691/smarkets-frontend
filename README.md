@@ -25,7 +25,7 @@ yarn dev
 
 ## Development
 
-I decided to go with next.js if we want to extend the functionality later and add more advanced API request logic. Material UI is my go to UI framework because it has a lot of well-designed components that make it easy to build a dialog, collapsible view, and other features.
+I decided to go with next.js because it can be useful if we want to extend the functionality later and add more advanced API request logic. Material UI is my go to UI framework because it has a lot of well-designed components that make it easy to build a dialog, collapsible view, and other features.
 
 I started the project by building a frontend and displaying some dummy data. I wasn't fully clear on all the fields of the contract, market, and event, and I didn't want to overly complicate it, so I made the schemas simple. The initial work helped me to understand what schema to create, and I moved onto building the API. The initial GET events endpoint didn't initially return the nested data for markets and contracts, so I updated the query.
 
