@@ -2,15 +2,20 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First start a local Postgres database
+1) Start a local Postgres database
 
-Second, run the Python API:
+2) Run the Python API:
 
 ```bash
 python3 main.py
 ```
 
-Third, run the development server:
+3) Create `.env` / `.env.local` with the server api:
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+4) Run the development server:
 
 ```bash
 npm run dev
