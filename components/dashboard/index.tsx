@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Moment } from "moment";
 import {
   AppBar,
   Toolbar,
@@ -37,6 +38,7 @@ export default function Dashboard() {
   const [tabIndex, setTabIndex] = useState(0);
 
   const [eventName, setEventName] = useState("");
+  const [eventStartTime, setEventStartTime] = useState<Moment | null>(null);
   const [eventType, setEventType] = useState("");
   const [marketName, setMarketName] = useState("");
   const [contractName, setContractName] = useState("");
@@ -210,6 +212,8 @@ export default function Dashboard() {
                 setEventName={setEventName}
                 eventType={eventType}
                 setEventType={setEventType}
+                eventStartTime={eventStartTime}
+                setEventStartTime={setEventStartTime}
               />
             )}
             {tabIndex === 1 && (
