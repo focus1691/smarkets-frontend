@@ -1,16 +1,16 @@
 export interface CreateContractData {
     name: string;
-    marketId: number;
+    market_id: number;
   }
   
   export interface CreateMarketData {
     name: string;
-    eventId: number;
+    event_id: number;
   }
   
   export interface CreateEventData {
     name: string;
-    startTime: Date | string;
+    start_time: Date | string;
     type: string;
   }
   
