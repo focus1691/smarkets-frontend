@@ -17,6 +17,8 @@ import {
   Tabs,
   Tab,
   Box,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -49,6 +51,9 @@ export default function Dashboard() {
   const [deleteType, setDeleteType] = useState<"event" | "market" | "contract" | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
   const fetchEvents = async () => {
     try {
       const data = await getEvents();
@@ -57,11 +62,11 @@ export default function Dashboard() {
       console.error("Error fetching events:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchEvents();
   }, []);
-  
+
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -87,35 +92,56 @@ export default function Dashboard() {
     setDeleteId(null);
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleCreate = async () => {
     try {
       if (tabIndex === 0) {
+        if (!eventName || !eventType) {
+          setSnackbarMessage("Event name and type are required.");
+          setSnackbarOpen(true);
+          return;
+        }
         await createEvent({
           name: eventName,
           start_time: new Date().toISOString(),
           type: eventType,
         });
-      } else if (tabIndex === 1 && selectedEventId) {
+      } else if (tabIndex === 1) {
+        if (!marketName || !selectedEventId) {
+          setSnackbarMessage("Market name and event selection are required.");
+          setSnackbarOpen(true);
+          return;
+        }
         await createMarket({
           name: marketName,
           event_id: selectedEventId,
         });
-      } else if (tabIndex === 2 && selectedMarketId) {
+      } else if (tabIndex === 2) {
+        if (!contractName || !selectedMarketId) {
+          setSnackbarMessage("Contract name and market selection are required.");
+          setSnackbarOpen(true);
+          return;
+        }
         await createContract({
           name: contractName,
           market_id: selectedMarketId,
         });
       }
       handleClose();
-      await fetchEvents(); // TODO: Remove this and check for 200 status and created event
+      await fetchEvents();
     } catch (error) {
       console.error("Error creating item:", error);
+      setSnackbarMessage("An error occurred while creating the item.");
+      setSnackbarOpen(true);
     }
   };
-  
+
   const handleDelete = async () => {
     if (!deleteId || !deleteType) return;
-  
+
     try {
       if (deleteType === "event") {
         await deleteEvent(deleteId);
@@ -130,7 +156,7 @@ export default function Dashboard() {
       console.error(`Error deleting ${deleteType}:`, error);
     }
   };
-  
+
 
   return (
     <>
@@ -262,6 +288,17 @@ export default function Dashboard() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleSnackbarClose} severity="error" sx={{ width: "100%" }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
