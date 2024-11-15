@@ -105,7 +105,7 @@ export default function Dashboard() {
         });
       }
       handleClose();
-      await fetchEvents(); // TODO: return the new event and update state 
+      await fetchEvents(); // TODO: Remove this and check for 200 status and created event
     } catch (error) {
       console.error("Error creating item:", error);
     }
@@ -123,7 +123,7 @@ export default function Dashboard() {
         await deleteContract(deleteId);
       }
       closeDeleteDialog();
-      await fetchEvents(); // TODO: Check for delete success and delete from state
+      await fetchEvents(); // TODO: Remove this and check for 200 status and delete from state
     } catch (error) {
       console.error(`Error deleting ${deleteType}:`, error);
     }

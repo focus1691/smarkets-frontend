@@ -17,3 +17,13 @@ npm run dev
 # or
 yarn dev
 ```
+
+## Development
+
+I decided to go with next.js if we want to extend the functionality later and add more advanced API request logic. Material UI is my go to UI framework because it has a lot of well-designed components that make it easy to build a dialog, collapsible view, and other features.
+
+I started the project by building a frontend and displaying some dummy data. I wasn't fully clear on all the fields of the contract, market, and event, and I didn't want to overly complicate it, so I made the schemas simple. The initial work helped me to understand what schema to create, and I moved onto building the API. The initial GET events endpoint didn't initially return the nested data for markets and contracts, so I updated the query.
+
+To make it better, I'd use RTK with OpenAI to generate the schema and add it here, so the dashboard can be in sync with the backend. With RTK, I can better handle the CRUD operations and managing state better.
+
+I would have liked to make more features, but the thinking about how to design the UI with the data took some time.
