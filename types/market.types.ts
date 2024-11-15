@@ -1,4 +1,4 @@
-interface Event {
+export interface Event {
   id: number;
   name: string;
   date: Date;
@@ -6,14 +6,14 @@ interface Event {
   markets: Market[];
 }
 
-interface Market {
+export interface Market {
   id: number;
   name: string;
   eventId: number;
   contracts: Contract[];
 }
 
-interface Contract {
+export interface Contract {
   id: number;
   name: string;
   marketId: number;
