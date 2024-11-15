@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -25,12 +25,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Event } from "@/types/market.types";
 import styles from "./dashboard.module.css";
+import { getEvents } from "@/api";
 
 const events: Event[] = [
   {
     id: 1,
     name: "Arsenal vs. Manchester City",
-    date: new Date("2023-11-14T20:00:00Z"),
+    startTime: new Date("2023-11-14T20:00:00Z"),
     type: "football",
     markets: [
       {
@@ -62,8 +63,21 @@ const StyledAppBar = styled(AppBar)({
 });
 
 export default function Dashboard() {
+  const [events, setEvents] = useState<Event[]>([]);
   const [open, setOpen] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const data = await getEvents();
+        setEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

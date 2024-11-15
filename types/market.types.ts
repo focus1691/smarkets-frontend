@@ -1,7 +1,7 @@
 export interface Event {
   id: number;
   name: string;
-  date: Date;
+  startTime: Date;
   type: string;
   markets: Market[];
 }
