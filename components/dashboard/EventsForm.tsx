@@ -1,14 +1,15 @@
 import React from "react";
 import { TextField, MenuItem, Box } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
+import { Moment } from "moment";
 
 interface EventsFormProps {
     eventName: string;
     setEventName: React.Dispatch<React.SetStateAction<string>>;
     eventType: string;
     setEventType: React.Dispatch<React.SetStateAction<string>>;
-    eventStartTime: Date | null;
-    setEventStartTime: React.Dispatch<React.SetStateAction<Date | null>>;
+    eventStartTime: Moment | null;
+    setEventStartTime: React.Dispatch<React.SetStateAction<Moment | null>>;
 }
 
 export default function EventsForm({
@@ -67,9 +68,14 @@ export default function EventsForm({
                 label="Event Start Time"
                 value={eventStartTime}
                 onChange={(newValue) => setEventStartTime(newValue)}
-                renderInput={(params) => (
-                    <TextField {...params} margin="dense" fullWidth required />
-                )}
+                slots={{ textField: TextField }}
+                slotProps={{
+                    textField: {
+                        margin: "dense",
+                        fullWidth: true,
+                        required: true,
+                    },
+                }}
             />
         </Box>
     );
