@@ -31,4 +31,4 @@ I started the project by building a frontend and displaying some dummy data. I w
 
 To make it better, I'd use RTK with OpenAI to generate the schema and add it here, so the dashboard can be in sync with the backend. With RTK, I can better handle the CRUD operations and managing state better.
 
-I would have liked to make more features, but the thinking about how to design the UI with the data took some time.
+I would have liked to make more features, but the thinking about how to design the UI with the data took some time. I would have liked to add a multi-add button to dynamically add multiple contracts at a time. It'd need a backend change too. 
